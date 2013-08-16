@@ -1,7 +1,7 @@
 Bootloader
 ==========
 
-Bootloader implementation concept. Tested with Bochs.
+x86 16-bit real-mode concept: Tested with Bochs as bootloader
 
 Assembled using nasm
     `nasm <sourcefile.asm> -o generated.img`
