@@ -1,16 +1,47 @@
-mov dx , 0x1fb6
+;Prints hex
+
+org 7c00h ;all offsets should be calculated from this address
+
+mov dx, 0x1fb6
 call print_hex
-; store the value to print in dx
-; call the function
-; prints the value of DX as hex.
+hlt
 
+print_hex:
+pusha
+mov cx, dx              ;store the passed-in parameter in cx
+mov di, 5
 
-print_hex :
-; TODO : manipulate chars at HEX_OUT to reflect DX
-mov bx , HEX_OUT
-; print the string pointed to
-call print_string ; by BX
+loopHex:
+    mov bx, hex_template ;dx is the start-address parameter to print_string
+    add bx, di 
+    
+    push cx         ; save cx for later shift
+    and cx, 0x000f  ; simple bit-mask
+    cmp cl, 9       ; checking if it is in the 0-9 or A-F range
+    jg alphabet
+    add cl, 0x30    ; adding ascii offset for hex digits -> 0-9
+    jmp offsetdone
+alphabet:
+    add cl, 0x37    ; adding ascii offset for hex digits -> A-F
+offsetdone:
+    mov [bx], cl    ; place it into hex-template at the right offset
+    pop cx
+    
+    shr cx, 4
+    dec di
+    cmp di, 2
+    jge loopHex
+    
+    mov dx, hex_template
+    call print_string
+popa
 ret
 
+%include "include/print_string.asm"
+jmp $
+
 ; global variables
-HEX_OUT : db ’0 x0000 ’ ,0
+hex_template db '0x0000', 0
+times 510 - ($ - $$) db 0
+dw 0xaa55
+
