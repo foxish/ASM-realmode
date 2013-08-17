@@ -1,10 +1,16 @@
 Bootloader
 ==========
 
-x86 16-bit real-mode concept: Tested with Bochs as bootloader
+x86 bootloader concept: Tested with Bochs
+
+ASM files called `BIOS-*` are to be run in 16-bit real-mode, as the first stage of the bootloader
+ASM files labeled `32-bit*` are the second stage bootloader
+
 
 Assembled using nasm
     `nasm <sourcefile.asm> -o generated.img`
+    
+
 
 
 `~/.bochsrc` looks like: (where `generated.img` is the output file from nasm)
