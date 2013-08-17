@@ -24,7 +24,7 @@ add di, 512
 call print_hex
 
 cmp di, 2048
-jle loopRead
+jl loopRead
 
 hlt
 
@@ -37,7 +37,8 @@ jmp $ ; infinite loop
 times 510 - ($ - $$) db 0
 dw 0xaa55
 
-times 256 dw 0xdada
-times 256 dw 0xface
-times 256 dw 0xb00b
+times 256 dw 0xbabe
+times 256 dw 0xd1ee
+times 256 dw 0xdead
 times 256 dw 0xbeef
+
