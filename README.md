@@ -1,7 +1,7 @@
-Bootloader
+Real-mode routines
 ==========
 
-x86 bootloader concept: Tested with Bochs. Each of these can be compiled into a functioning bootloader.
+x86 real-mode concept: Tested with Bochs. Each of these can be compiled into a functioning bootloader.
 
  - ASM files called `BIOS-*` are to be run in 16-bit real-mode, as the first stage of the bootloader
  - ASM files labeled `32-bit*` are the second stage bootloader
